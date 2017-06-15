@@ -10,15 +10,15 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { NativeModules } from 'react-native';
-var RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
+import { NativeModules, DeviceEventEmitter } from 'react-native';
+//var RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
 var ortcClient = NativeModules.RealtimeMessaging;
 var RTEvents = {};
 var instances = 0;
 
-class RCTRealtimeMessagingIOS extends React.Component {
+export default class RCTRealtimeMessagingIOS extends Component {
 	id: String;
-	
+
 	constructor(props) {
     super(props);
 		this.id = ""+instances++;
@@ -27,7 +27,7 @@ class RCTRealtimeMessagingIOS extends React.Component {
 	RTConnect(config){
 		ortcClient.connect(config, this.id);
 	}
-	
+
 
 	RTDisconnect(){
 		ortcClient.disconnect(this.id);
@@ -47,10 +47,6 @@ class RCTRealtimeMessagingIOS extends React.Component {
 
 	RTUnsubscribe(channel){
 		ortcClient.unsubscribe(channel, this.id);
-	}
-
-	RTPublishMessage(channel, message, ttl, callBack){
-		ortcClient.publish(channel, message, ttl, this.id, callBack);
 	}
 
 	RTSendMessage(message, channel){
@@ -121,7 +117,7 @@ class RCTRealtimeMessagingIOS extends React.Component {
 	*/
 
 	RTPushNotificationListener(callBack: Function){
-		require('RCTDeviceEventEmitter').addListener(
+		DeviceEventEmitter.addListener(
 			  'onPushNotification',
 			  callBack
 			);
@@ -137,7 +133,7 @@ class RCTRealtimeMessagingIOS extends React.Component {
 		}
 
 		RTEvents[modNotification] = (
-			require('RCTDeviceEventEmitter').addListener(
+			DeviceEventEmitter.addListener(
 			  modNotification,
 			  callBack
 			)
