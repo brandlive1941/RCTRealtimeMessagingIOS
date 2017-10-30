@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "RCTOrtcClient.h"
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 //#import "RCTBridge.h"
-#import "RCTEventDispatcher.h"
+#import <React/RCTEventDispatcher.h>
 
 @interface RCTRealtimeMessaging : NSObject<OrtcClientDelegate, RCTBridgeModule>
 @property(retain, nonatomic)OrtcClient *ortcClient;
@@ -18,3 +18,4 @@
 @property(retain, nonatomic)NSDictionary *pushInfo;
 
 @end
+
