@@ -7,7 +7,7 @@
 //
 
 #import "RCTRealtimeMessaging.h"
-#import <RCTConvert.h>
+#import <React/RCTConvert.h>
 
 @implementation RCTRealtimeMessaging
 @synthesize bridge = _bridge;
